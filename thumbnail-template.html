@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Indie Aisle page thumbnail</title>
+  </head>
+<body>
+<style>
+*, * :before, * :after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fff;
+  padding: 20px;
+  font-family: "Helvetica", Arial, sans-serif;
+  font-size: 1.375rem;
+  line-height: 1.4;
+  color: #333;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  cursor: default;
+}
+
+#thumbnail {
+  position: relative;
+  margin-bottom: 20px;
+  width: 600px;
+  height: 315px;
+  background-color: #eee;
+  padding: 40px;
+  text-align: left;
+}
+.photo {
+  border-radius: 100%;
+}
+.photo.publication {
+  border-radius: 10px;
+}
+h1 {
+  margin-bottom: 20px;
+  font-size: 3.125rem;
+  font-weight: 500;
+  line-height: 1.1;
+  color: #333;
+}
+.btn-main {
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  border-radius: 50px;
+  border: 1px solid #175bd2;
+  border-bottom: 2px solid #175bd2;
+  background-clip: padding;
+  box-sizing: border-box;
+  background-color: #2579dd;
+  padding: 10px 16px;
+  color: #fff;
+  white-space: nowrap;
+  text-decoration: none;
+  font-size: 1.125rem;
+  line-height: 1;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  overflow: hidden;
+}
+</style>
+
+<div id="thumbnail">
+  <div class="block-region block-remove" data-group="avatar"><img src="https://indieaisle.com/homescreen-icon.jpg" width="70" height="70" class="photo block-edit" data-block="avatar-image" alt=""></div>
+  <div class="block-region block-remove" data-group="avatar"><img src="https://indieaisle.com/homescreen-icon.jpg" width="70" height="70" class="photo publication block-edit" data-block="avatar-image" alt=""></div>
+  <h1 class="block-edit block-maxchar-45" data-block="title">The title of your page goes here</h1>
+  <p class="block-edit block-maxchar-50 block-remove" data-block="url">indieaisle.com</p>
+</div>
+<a href="#" class="btn-main" onclick="capture();">Capture</a>
+
+<script src="https://indieaisle.com/screenshot/html2canvas.min.js" defer></script>
+<script>
+function capture() {
+  const captureElement = document.querySelector('#thumbnail')
+  html2canvas(captureElement)
+    .then(canvas => {
+      canvas.style.display = 'none'
+      document.body.appendChild(canvas)
+      return canvas
+    })
+    .then(canvas => {
+      const image = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
+      const a = document.createElement('a')
+      a.setAttribute('download', 'thumbnail.png')
+      a.setAttribute('href', image)
+      a.click()
+      canvas.remove()
+    })
+}
+</script>
+
+</body>
+</html>
